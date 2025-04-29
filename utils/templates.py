@@ -37,12 +37,19 @@ def modify_template(dati_cv):
     }
 
     # Aggiungiamo i segnaposto per i titoli di studio
-    for i in range(1, 3):  # Supponendo sempre 2 blocchi per istruzione
-        education = dati_cv["istruzione"][i-1]
-        label_values[f"{{data_conseguimento_{i}}}"] = education.get("data_conseguimento","")
-        label_values[f"{{nome_istituto_{i}}}"] = education.get("nome_istituto","")
-        label_values[f"{{titolo_{i}}}"] = education.get("titolo","")
-        label_values[f"{{desc_titolo_{i}}}"] = education.get("desc_titolo","")
+    for i in range(1, 3): # Supponendo sempre 2 blocchi per istruzione
+        if i <= len(dati_cv["istruzione"]):  
+            education = dati_cv["istruzione"][i-1]
+            label_values[f"{{data_conseguimento_{i}}}"] = education.get("data_conseguimento","")
+            label_values[f"{{nome_istituto_{i}}}"] = education.get("nome_istituto","")
+            label_values[f"{{titolo_{i}}}"] = education.get("titolo","")
+            label_values[f"{{desc_titolo_{i}}}"] = education.get("desc_titolo","")
+        else:
+            label_values[f"{{data_conseguimento_{i}}}"] = ""
+            label_values[f"{{nome_istituto_{i}}}"] = ""
+            label_values[f"{{titolo_{i}}}"] = ""
+            label_values[f"{{desc_titolo_{i}}}"] = ""
+        
 
     # Aggiungi i segnaposto per le esperienze
     for i in range(1, 4):  # Supponendo 3 blocchi per le esperienze
