@@ -12,6 +12,15 @@ from utils.cv_parser import read_pdf
 from utils.job_parser import input_job_description
 from utils.gemini_matcher import get_matching_score
 
+#Impostazione colore dello spinner
+st.markdown("""
+    <style>
+        .stSpinner > div > div {
+            color: salmon !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Caricare l'immagine locale
 image_path = "assets/transparent_logo.png"  # <-- il tuo file immagine
 
@@ -118,12 +127,12 @@ if page == "team":
     st.stop()  # Ferma l'esecuzione per non eseguire il resto
 
 # Carica variabili d’ambiente
-load_dotenv("api.env")
+load_dotenv(dotenv_path="api2.env")
 api_key = os.getenv("API_KEY")
 
 # Verifica che la chiave API sia presente
 if api_key is None:
-    st.error("API_KEY non trovata nel file api.env. Verifica il file.")
+    st.error("API_KEY non trovata nel file api2.env. Verifica il file.")
 
 # Inizializzazione dello stato della sessione
 if 'cv_json' not in st.session_state:
